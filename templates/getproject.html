@@ -4,7 +4,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>楼盘详情</title>
+    <title>楼盘详情-{{ Project.0.project.projectname }}</title>
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "K15SGU7T6JZOHoVU", ck: "K15SGU7T6JZOHoVU"})</script>
     <link rel="stylesheet" href="{% static 'newHouse/css/styles.css' %}">
@@ -46,7 +46,9 @@
                             {% endwith %}
                         {% endwith %}
                     {% else %}
-                        <td><a href="/getbuilding/?buildingid={{ p.buildingId }}&blockname={{ p.blockname }}">{{ p.blockname }}</a></td>
+                        <td>
+                            <a href="/getbuilding/?buildingid={{ p.buildingId }}&blockname={{ p.blockname }}">{{ p.blockname }}</a>
+                        </td>
                     {% endif %}
                 </tr>
             {% endfor %}
