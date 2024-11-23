@@ -1,0 +1,203 @@
+{% load custom_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>楼栋详情</title>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "K15SGU7T6JZOHoVU", ck: "K15SGU7T6JZOHoVU"})</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        button {
+
+            padding: 8px 15px;
+
+            background-color: #007bff;
+
+            color: #fff;
+
+            border: none;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            transition: background-color 0.3s ease;
+
+            margin-right: 10px;
+
+
+        }
+
+        button:hover {
+
+            background-color: #0056b3;
+
+        }
+
+        .container {
+
+
+            margin: 0 auto;
+
+            background-color: #fff;
+
+            padding: 20px;
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+            border-radius: 8px;
+
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #1335fb;
+        }
+
+        table {
+
+            border-collapse: collapse;
+            margin-bottom: 20px;
+
+        }
+
+        th, td {
+            border: 1px solid #040404;
+            padding: 2px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+
+        .网签 {
+            background: #ca00fd;
+            color: #fff;
+        }
+
+        .认购 {
+            background: #fd0000;
+            color: #fff;
+
+        }
+
+        .现房 {
+            background: #00fd00;
+            color: #000;
+        }
+
+        .期房 {
+            background: #00fdff;
+            color: #000;
+        }
+
+        .房屋抵押 {
+            background: #666666;
+            color: #fff;
+        }
+
+        #不可售 {
+            background: #fcfc00;
+            color: #000;
+        }
+
+        p {
+            margin: 5px 0;
+            font-weight: bold;
+            font-size: 14px;
+
+        }
+
+        p.red {
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+
+    <p>
+        <button onclick="window.location.href='/?projectname={{ data_b.projectName }}'">返回上一页</button>
+    </p>
+
+    <p>开发商：{{ data_b.enterpriseName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预售许可：{{ data_b.presaleCert }}</p>
+    <p>项目地址：{{ data_b.location }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项目名称：{{ data_b.projectName }}</p>
+    <p>建筑面积：{{ total_area }}平米&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预售货值：{{ total_price }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预售均价：{{ average_price }}元/平米（若直接办理现售，将不存在预售价格）</p>
+    <p>
+        <button onclick="window.location.href='/getbuilding/?buildingid={{ buildingid }}&blockname={{ blockname }}&type=1'">
+            按房号
+        </button>
+        <button onclick="window.location.href='/getbuilding/?buildingid={{ buildingid }}&blockname={{ blockname }}&type=2'">
+            按面积
+        </button>
+        <button onclick="window.location.href='/getbuilding/?buildingid={{ buildingid }}&blockname={{ blockname }}&type=3'">
+            按单价
+        </button>
+    </p>
+
+    {{ table_html|safe }}
+
+    <table>
+        <thead>
+        <tr>
+            <th>统计日期</th>
+            <th class="网签">网签</th>
+            <th class="认购">认购</th>
+            <th class="现房">现房</th>
+            <th class="期房">期房</th>
+            <th class="房屋抵押">抵押</th>
+            <th id="不可售">不可售</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>当前</td>
+            <td>{{ sing }}</td>
+            <td>{{ buy }}</td>
+            <td>{{ now }}</td>
+            <td>{{ period }}</td>
+            <td>{{ mortgage }}</td>
+            <td>{{ nosale }}</td>
+        </tr>
+        {% for Building in Buildings %}
+            <tr>
+                <td>{{ Building.date_added|date:"y-m-d" }}</td>
+                <td>{{ Building.online_signatures }}</td>
+                <td>{{ Building.subscriptions }}</td>
+                <td>{{ Building.ready_houses }}</td>
+                <td>{{ Building.future_houses }}</td>
+                <td>{{ Building.mortgages }}</td>
+                <td>{{ Building.unsold_units }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="disclaimer">
+        <p class="red">说明：认购网签状态存在延迟，视为已售即可，跃层房源可能存在房源数量误差</p>
+        <p class="red">
+            免责申明：本平台所提供的所有数据与信息均来源于互联网上的公开资源，且不对这些信息的准确性、完整性或及时性做出任何保证。</p>
+        <p class="red">
+            本平台提供的数据和信息仅供用户个人学习、参考及研究之用，不得用于任何商业目的。任何未经许可的商业使用均属违法行为，由此产生的任何法律后果均由使用者自行承担。</p>
+        <p class="red">
+            对于因使用本平台提供的数据和信息而直接或间接引起的任何损失或损害（包括但不限于经济损失、名誉损失等），本平台不承担任何法律责任。</p>
+    </div>
+</div>
+</body>
+</html>

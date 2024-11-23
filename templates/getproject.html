@@ -1,0 +1,69 @@
+{% load myfilter %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>楼盘详情</title>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "K15SGU7T6JZOHoVU", ck: "K15SGU7T6JZOHoVU"})</script>
+    <link rel="stylesheet" href="{% static 'newHouse/css/styles.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>楼盘详情</h1>
+    <form action="/" method="GET" class="search-form">
+        <label for="projectname">楼盘名称：</label>
+        <input id="projectname" name="projectname" type="text" placeholder="请输入楼盘名称"/>
+        <label for="entName">开发商：</label>
+        <input id="entName" name="entName" type="text" placeholder="请输入开发商（选填）"/>
+        <button type="submit" class="search-button">搜索</button>
+    </form>
+    <p>
+        <button onclick="history.back()">返回上一页</button>
+    </p>
+    <table class="project-table">
+        {% if Project and Project.0.project %}
+            <tr>
+                <td>项目名称：{{ Project.0.project.projectname }}，开发商：{{ Project.0.project.enterprisename }}</td>
+                <td>项目地址：{{ Project.0.project.location }}</td>
+            </tr>
+            <tr>
+                <th>证件号</th>
+                <th>楼栋号</th>
+            </tr>
+            {% for p in Project.0.buildings %}
+                <tr>
+                    <td>{{ p.presale_cert }}</td>
+                    {% if p.buildingId|length > 22 %}
+                        {% with p.blockname|split:"," as name %}
+                            {% with p.buildingId|split:"," as id %}
+                                <td>
+                                    {% for n,i in name|zip1:id %}
+                                        <a href="/getbuilding/?buildingid={{ i }}&blockname={{ n }}">{{ n }} </a>
+                                    {% endfor %}
+                                </td>
+                            {% endwith %}
+                        {% endwith %}
+                    {% else %}
+                        <td><a href="/getbuilding/?buildingid={{ p.buildingId }}&blockname={{ p.blockname }}">{{ p.blockname }}</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="3">暂无数据</td>
+            </tr>
+        {% endif %}
+    </table>
+    <div class="disclaimer">
+        <p>
+            免责申明：本平台所提供的所有数据与信息均来源于互联网上的公开资源，且不对这些信息的准确性、完整性或及时性做出任何保证。</p>
+        <p>
+            本平台提供的数据和信息仅供用户个人学习、参考及研究之用，不得用于任何商业目的。任何未经许可的商业使用均属违法行为，由此产生的任何法律后果均由使用者自行承担。</p>
+        <p>
+            对于因使用本平台提供的数据和信息而直接或间接引起的任何损失或损害（包括但不限于经济损失、名誉损失等），本平台不承担任何法律责任。</p>
+    </div>
+</div>
+</body>
+</html>

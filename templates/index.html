@@ -1,0 +1,65 @@
+{% load myfilter %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>重庆新房信息查询</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'newHouse/css/styles.css' %}">
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "K15SGU7T6JZOHoVU", ck: "K15SGU7T6JZOHoVU"})</script>
+</head>
+<body>
+<div class="container">
+    <h1>重庆新房信息查询</h1>
+
+    <form action="" method="GET" class="search-form">
+        楼盘名称：<input name="projectname" type="text" placeholder="请输入楼盘名称"/>
+        开发商：<input name="entName" type="text" placeholder="请输入开发商（选填）"/>
+        <button type="submit">搜索</button>
+    </form>
+
+    <table class="project-table">
+        <tr>
+            <th>项目名称</th>
+            <th>开发商</th>
+            <th>项目地址</th>
+            <th>证件号</th>
+            <th>楼栋</th>
+        </tr>
+        {% for p in Project %}
+            <tr>
+                <td><a href="getproject/?projectId={{ p.projectid }}">{{ p.projectname }}</a></td>
+                <td>{{ p.enterprisename }}</td>
+                <td>{{ p.location }}</td>
+                <td>{{ p.f_presale_cert }}</td>
+                <td>
+                    {% if p.buildingid|length > 22 %}
+                        {% with p.blockname|split:"," as name %}
+                            {% with p.buildingid|split:"," as id %}
+                                {% for n,i in name|zip1:id %}
+                                    <a href="/getbuilding/?buildingid={{ i }}&blockname={{ n }}">{{ n }} </a>
+                                {% endfor %}
+                            {% endwith %}
+                        {% endwith %}
+                        </td>
+                    {% else %}
+                        <a href="/getbuilding/?buildingid={{ p.buildingid }}&blockname={{ p.blockname }}">{{ p.blockname }}</a>
+                    {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="disclaimer">
+        <p>
+            免责申明：本平台所提供的所有数据与信息均来源于互联网上的公开资源，且不对这些信息的准确性、完整性或及时性做出任何保证。</p>
+        <p>
+            本平台提供的数据和信息仅供用户个人学习、参考及研究之用，不得用于任何商业目的。任何未经许可的商业使用均属违法行为，由此产生的任何法律后果均由使用者自行承担。</p>
+        <p>
+            对于因使用本平台提供的数据和信息而直接或间接引起的任何损失或损害（包括但不限于经济损失、名誉损失等），本平台不承担任何法律责任。</p>
+    </div>
+</div>
+</body>
+</html>
