@@ -111,4 +111,7 @@ class Command(BaseCommand):
 
             time.sleep(1)  # 暂停 1 秒
 
+        projects_to_delete = Building.objects.filter(project_name='未知项目')
+        projects_to_delete.delete()
+
         self.stdout.write(self.style.SUCCESS('共计' + str(len(task)) + '个爬取任务，成功' + str(success_counts)))
