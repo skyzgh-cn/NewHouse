@@ -1,6 +1,7 @@
 import json
 import time
 
+from django.contrib.messages import success
 from django.core.management.base import BaseCommand
 import requests
 from newHouse.models import Building
@@ -20,7 +21,7 @@ class Command(BaseCommand):
 
         task = set(all_building_ids) - set(today_building_ids)
 
-        count = 0
+        success_counts = 0
 
         def get_nosale_count(data):
             count = 0
@@ -76,17 +77,21 @@ class Command(BaseCommand):
                 headers=headers,
                 json=json_data,
             )
-            raw_string = response_BuildingInfo.text
-            # 解析原始字符串为Python字典
-            data_dict = json.loads(raw_string)
+            try :
+                raw_string = response_BuildingInfo.text
+                # 解析原始字符串为Python字典
+                data_dict = json.loads(raw_string)
+                # 解析嵌套的字符串为Python字典
+                nested_dict = json.loads(data_dict['d'])
+                # 将整个数据结构转换为格式良好的JSON字符串
+                data_b = json.dumps(nested_dict, ensure_ascii=False, indent=4)
+                data_b = json.loads(data_b)
 
-            # 解析嵌套的字符串为Python字典
-            nested_dict = json.loads(data_dict['d'])
-
-            # 将整个数据结构转换为格式良好的JSON字符串
-            data_b = json.dumps(nested_dict, ensure_ascii=False, indent=4)
-            data_b = json.loads(data_b)
-            print(data_b)
+            except:
+                print("解析失败")
+                data_b['projectName']='未知项目'
+            else:
+                print("解析成功")
 
             d = response.text  # 获取JSON
             d = (d.lstrip('{"d":"').rstrip('"}')).replace('\\"', '"')  # 整理格式
@@ -102,7 +107,8 @@ class Command(BaseCommand):
                 project_name=data_b['projectName']
             )
             new_building.save()
-            count += 1
+            success_counts += 1
+
             time.sleep(1)  # 暂停 1 秒
 
-        self.stdout.write(self.style.SUCCESS('共计' + str(len(task)) + '个爬取任务，已完成' + str(count)))
+        self.stdout.write(self.style.SUCCESS('共计' + str(len(task)) + '个爬取任务，成功' + str(success_counts)))
