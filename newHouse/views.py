@@ -110,6 +110,7 @@ def getbuilding(request):
         buildingid = '_aqavcBJHT/NX4YLhxn7aA'
 
     blockname = request.GET.get('blockname')
+    cache.set('blockname_key', blockname, timeout=300)
 
     type1 = request.GET.get('type')
     if type1 == None:
@@ -357,6 +358,7 @@ def getbuilding(request):
 def getroom(request):
     fid = request.GET.get('fid')
     data = cache.get('room_info')
+    # print(data)
     data = json.loads(data)
 
     def get_room_data(data, fid, key):
@@ -367,7 +369,7 @@ def getroom(request):
         return '未知'
 
     roomname = str(get_room_data(data, fid, 'flr')) + '-' + str(get_room_data(data, fid, 'rn'))
-    block = get_room_data(data, fid, 'block')
+    block = cache.get('blockname_key')
     bArea = get_room_data(data, fid, 'bArea')
     iArea = get_room_data(data, fid, 'iArea')
     use = get_room_data(data, fid, 'use')

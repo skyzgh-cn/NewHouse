@@ -1,138 +1,1 @@
- body {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-.container {
-    width: 80%;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-th, td {
-    border: 1px solid #000;
-    padding: 10px;
-    text-align: center;
-}
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-a {
-    color: #0047fd;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-form {
-    margin-bottom: 20px;
-}
-input[type="text"] {
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-button {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-button:hover {
-    background-color: #0056b3;
-}
-.disclaimer {
-    margin-top: 20px;
-    color: #ff0000;
-    font-weight: bold;
-}
-
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-/* 搜索表单样式 */
-.search-form {
-    display: flex;
-
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.search-form label {
-    margin-right: 10px;
-    font-weight: bold;
-}
-
-.search-form input[type="text"] {
-    width: 200px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-.search-button {
-    padding: 10px 20px;
-    background-color: #0047fd;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-button:hover {
-    background-color: #0035b3;
-}
-
-/* 表格样式 */
-.project-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.project-table th, .project-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: center;
-}
-
-.project-table th {
-    background-color: #f8f8f8;
-    color: #333;
-}
-
-.project-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.project-table tr:hover {
-    background-color: #eaeaea;
-}
-
-.project-table a {
-    color: #0047fd;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.project-table a:hover {
-    color: #0035b3;
-}
+body {    font-family: Arial, sans-serif;    font-size: 14px;    background-color: #f4f4f4;    margin: 0;    padding: 20px;}.container {    width: 80%;    margin: 0 auto;    background-color: #fff;    padding: 20px;    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);    border-radius: 8px;}table {    width: 100%;    border-collapse: collapse;    margin-top: 20px;}th, td {    border: 1px solid #000;    padding: 10px;    text-align: center;}th {    background-color: #f2f2f2;    font-weight: bold;}a {    color: #0047fd;    text-decoration: none;}a:hover {    text-decoration: underline;}form {    margin-bottom: 20px;}input[type="text"] {    padding: 8px;    margin-right: 10px;    border: 1px solid #ccc;    border-radius: 4px;}button {    padding: 8px 15px;    background-color: #007bff;    color: #fff;    border: none;    border-radius: 4px;    cursor: pointer;    transition: background-color 0.3s ease;}button:hover {    background-color: #0056b3;}.disclaimer {    margin-top: 20px;    color: #ff0000;    font-weight: bold;}h1 {    text-align: center;    color: #333;}/* 搜索表单样式 */.search-form {    display: flex;    align-items: center;    margin-bottom: 20px;}.search-form label {    margin-right: 10px;    font-weight: bold;}.search-form input[type="text"] {    width: 200px;    padding: 10px;    border: 1px solid #ccc;    border-radius: 4px;    margin-right: 10px;}.search-button {    padding: 10px 20px;    background-color: #0047fd;    color: #fff;    border: none;    border-radius: 4px;    cursor: pointer;    transition: background-color 0.3s ease;}.search-button:hover {    background-color: #0035b3;}/* 表格样式 */.project-table {    width: 100%;    border-collapse: collapse;    margin-top: 20px;}.project-table th, .project-table td {    border: 1px solid #ddd;    padding: 12px;    text-align: center;}.project-table th {    background-color: #f8f8f8;    color: #333;}.project-table tr:nth-child(even) {    background-color: #f9f9f9;}.project-table tr:hover {    background-color: #eaeaea;}.project-table a {    color: #0047fd;    text-decoration: none;    transition: color 0.3s ease;}.project-table a:hover {    color: #0035b3;}
