@@ -3,15 +3,21 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2de39a46acd076b3d59c252ef9472f8a";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
     <meta charset="UTF-8">
-
     <title>楼盘详情-{{ Project.0.project.projectname }}</title>
     <meta name="keywords"
           content="重庆新房成交,新房销售情况,重庆房产市场,房产销控查询,楼盘动态,新房价格走势,重庆房地产,房屋销售数据,销售监控,新房成交量,房价趋势,楼市情报,重庆购房指南">
     <meta name="description"
           content="提供最新的重庆新房成交信息和销控查询服务，帮助房地产企业研判新房市场动态，同时为购房者提供决策依据。">
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-    <script>LA.init({id: "K15SGU7T6JZOHoVU", ck: "K15SGU7T6JZOHoVU"})</script>
     <link rel="stylesheet" href="{% static 'newHouse/css/styles.css' %}">
 </head>
 <body>
