@@ -16,6 +16,7 @@
 2.  安装项目依赖 `pip install -r requirements.txt`
 3.  运行项目 `python manage.py runserver`
 4.  运行成功后如下图：点击链接便可在游览器使用
+
 ![输入图片说明](https://foruda.gitee.com/images/1745588321757390225/15baece6_15153574.png "运行成功")
 
 #### 使用说明
